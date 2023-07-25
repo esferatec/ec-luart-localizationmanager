@@ -1,25 +1,20 @@
-local io = require("io")
-local json = require("json")
-local ui = require("ui")
 local lm = require("ecluart.localizationmanager")
+local json = require("json")
 
 local jsonlocalizationmanager = {}
 
-local function loadfile(filename)
-  print(filename)
+-- Loads the dictionary from the json file.
+-- loadSourceFile() -> string
+local function loadDictionary(filename)
   local file = io.open(filename, "r")
-  print(file)
 
   if file then
-    print("a")
     local contents = file:read("a")
-    print(contents)
     file:close()
     return json.decode(contents)
-  else
-    print("b")
-    return nil
   end
+
+  return nil
 end
 
 -- Defines the metatable.
@@ -29,28 +24,33 @@ JsonLocalization.__index = JsonLocalization
 -- Sets the translated text for each widget.
 -- translate() -> none
 function JsonLocalization:translate()
-  -- dic = dictionary
-  local dic = loadfile(self.source)
+  if self.source == "" then
+    return
+  end
 
-  -- c = child
-  for _, c in ipairs(self.children) do
-    c.widget.text = dic[c.key]
+  local dictionary = loadDictionary(self.source)
+
+  if type(dictionary) ~= "table" then
+    return
+  end
+
+  for _, child in ipairs(self.children) do
+    local translatedText = dictionary[child.key]
+    if translatedText then child.widget.text = translatedText end
   end
 end
 
 -- Initializes a new json localizer instance.
 -- JsonLocalization(source: string, language?: string) -> table
 function jsonlocalizationmanager.JsonLocalization(source, language)
-  -- validates parameter types
-  assert(lm.isstring(source), lm.ERRORMESSAGE.notstring .. "source")
+  assert(lm.isString(source), lm.ERRORMESSAGE.notstring .. "source")
 
-  -- new localizer
-  local nl = setmetatable({}, JsonLocalization)
-  nl.children = {}
-  nl.language = language or ""
-  nl.source = source
+  local newLocalization = setmetatable({}, JsonLocalization)
+  newLocalization.children = {}
+  newLocalization.language = language or ""
+  newLocalization.source = source
 
-  return nl
+  return newLocalization
 end
 
 return jsonlocalizationmanager

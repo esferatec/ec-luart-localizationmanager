@@ -6,31 +6,44 @@ local tablelocalizationmanager = {}
 local TableLocalization = lm.BaseLocalization()
 TableLocalization.__index = TableLocalization
 
+-- Loads the dictionary from the table file.
+-- loadSourceFile() -> string
+local function loadDictionary(sourcefile)
+  return dofile(sourcefile)
+end
+
 -- Sets the translated text for each widget.
 -- translate() -> none
 function TableLocalization:translate()
-  -- dic = dictionary
-  local dic = dofile(self.source)
+  print(self.source)
+  if self.source == "" then
+    return
+  end
 
-  -- c = child
-  for _, c in ipairs(self.children) do
-    c.widget.text = dic[c.key]
+  local dictionary = loadDictionary(self.source)
+  print(dictionary)
+
+  if type(dictionary) ~= "table" then
+    return
+  end
+
+  for _, child in ipairs(self.children) do
+    local translatedText = dictionary[child.key]
+    if translatedText then child.widget.text = translatedText end
   end
 end
 
 -- Initializes a new table localizer instance.
 -- TableLocalization(source: string, language?: string) -> table
 function tablelocalizationmanager.TableLocalization(source, language)
-  -- validates parameter types
-  assert(lm.isstring(source), lm.ERRORMESSAGE.notstring .. "source")
+  assert(lm.isString(source), lm.ERRORMESSAGE.notstring .. "source")
 
-  -- new localizer
-  local nl = setmetatable({}, TableLocalization)
-  nl.children = {}
-  nl.language = language or ""
-  nl.source = source
+  local newLocalization = setmetatable({}, TableLocalization)
+  newLocalization.children = {}
+  newLocalization.language = language or ""
+  newLocalization.source = source
 
-  return nl
+  return newLocalization
 end
 
 return tablelocalizationmanager
