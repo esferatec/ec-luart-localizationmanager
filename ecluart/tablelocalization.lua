@@ -15,13 +15,11 @@ end
 -- Sets the translated text for each widget.
 -- translate() -> none
 function TableLocalization:translate()
-  print(self.source)
   if self.source == "" then
     return
   end
 
   local dictionary = loadDictionary(self.source)
-  print(dictionary)
 
   if type(dictionary) ~= "table" then
     return

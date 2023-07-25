@@ -36,7 +36,7 @@ BaseLocalization.__index = BaseLocalization
 -- Adds a child widget and key.
 -- add(child: table, key: string) -> none
 function BaseLocalization:add(child, key)
-  --assert(localizationmanager.isValidChild(child), localizationmanager.ERRORMESSAGE.notvalidchild .. "child")
+  assert(localizationmanager.isValidChild(child), localizationmanager.ERRORMESSAGE.notvalidchild .. "child")
   assert(localizationmanager.isString(key), localizationmanager.ERRORMESSAGE.notstring .. "key")
 
   local newWidget = {}
