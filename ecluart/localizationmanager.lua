@@ -33,6 +33,11 @@ local BaseLocalization = {
 }
 BaseLocalization.__index = BaseLocalization
 
+-- Defines the method of loading the dictionary to be overwritten.
+function BaseLocalization:_loadDictionary(sourcefile)
+  return {}
+end
+
 -- Adds a child widget and key.
 -- add(child: table, key: string) -> none
 function BaseLocalization:add(child, key)
@@ -84,6 +89,25 @@ end
 -- getLocale() -> string
 function BaseLocalization:getLocale()
   return os.setlocale(nil)
+end
+
+-- Sets the translated text for each widget.
+-- translate() -> none
+function BaseLocalization:translate()
+  local dictionary = {}
+
+  if self.source ~= "" then
+    dictionary = self._loadDictionary(self.source)
+  end
+
+  if next(dictionary) == nil then
+    return
+  end
+
+  for _, child in ipairs(self.children) do
+    local translatedText = dictionary[child.key]
+    if translatedText then child.widget.text = translatedText end
+  end
 end
 
 -- Initializes a new base localization class.

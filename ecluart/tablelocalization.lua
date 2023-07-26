@@ -2,34 +2,21 @@ local lm = require("ecluart.localizationmanager")
 
 local tablelocalizationmanager = {}
 
+-- Loads the dictionary from the table file.
+-- loadDictionary(sourcefile: string) -> string
+local function loadDictionary(sourcefile)
+  local file = dofile(sourcefile)
+
+  if file == nil or type(file) ~= "table" then
+    return {}
+  end
+
+  return file or {}
+end
+
 -- Defines the metatable.
 local TableLocalization = lm.BaseLocalization()
 TableLocalization.__index = TableLocalization
-
--- Loads the dictionary from the table file.
--- loadSourceFile() -> string
-local function loadDictionary(sourcefile)
-  return dofile(sourcefile)
-end
-
--- Sets the translated text for each widget.
--- translate() -> none
-function TableLocalization:translate()
-  if self.source == "" then
-    return
-  end
-
-  local dictionary = loadDictionary(self.source)
-
-  if type(dictionary) ~= "table" then
-    return
-  end
-
-  for _, child in ipairs(self.children) do
-    local translatedText = dictionary[child.key]
-    if translatedText then child.widget.text = translatedText end
-  end
-end
 
 -- Initializes a new table localizer instance.
 -- TableLocalization(source: string, language?: string) -> table
@@ -40,6 +27,7 @@ function tablelocalizationmanager.TableLocalization(source, language)
   newLocalization.children = {}
   newLocalization.language = language or ""
   newLocalization.source = source
+  newLocalization._loadDictionary = loadDictionary
 
   return newLocalization
 end
