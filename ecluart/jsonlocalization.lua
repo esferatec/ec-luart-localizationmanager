@@ -31,6 +31,7 @@ function jsonlocalizationmanager.JsonLocalization(source, language)
   newLocalization.language = language or ""
   newLocalization.source = source
   newLocalization._loadDictionary = loadDictionary
+
   return newLocalization
 end
 
