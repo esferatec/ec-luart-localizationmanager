@@ -4,7 +4,7 @@ local json = require("json")
 local jsonlocalizationmanager = {}
 
 -- Loads the dictionary from the json file.
--- loadDictionary(sourcefile: string) -> string
+-- loadDictionary(sourcefile: string) -> table
 local function loadDictionary(sourcefile)
   local file = io.open(sourcefile, "r")
 
@@ -30,7 +30,7 @@ function jsonlocalizationmanager.JsonLocalization(source, language)
   newLocalization.children = {}
   newLocalization.language = language or ""
   newLocalization.source = source
-  newLocalization._loadDictionary = loadDictionary
+  newLocalization.dictionary = loadDictionary
 
   return newLocalization
 end

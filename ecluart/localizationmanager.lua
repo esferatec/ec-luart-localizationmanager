@@ -29,14 +29,10 @@ end
 local BaseLocalization = {
   children = {},
   language = "",
-  source = ""
+  source = "",
+  dictionary = {}
 }
 BaseLocalization.__index = BaseLocalization
-
--- Defines the method of loading the dictionary to be overwritten.
-function BaseLocalization:_loadDictionary(sourcefile)
-  return {}
-end
 
 -- Adds a child widget and key.
 -- add(child: table, key: string) -> none
@@ -97,7 +93,7 @@ function BaseLocalization:translate()
   local dictionary = {}
 
   if self.source ~= "" then
-    dictionary = self._loadDictionary(self.source)
+    dictionary = self.dictionary(self.source)
   end
 
   if next(dictionary) == nil then

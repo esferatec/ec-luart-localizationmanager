@@ -3,7 +3,7 @@ local lm = require("ecluart.localizationmanager")
 local tablelocalizationmanager = {}
 
 -- Loads the dictionary from the table file.
--- loadDictionary(sourcefile: string) -> string
+-- loadDictionary(sourcefile: string) -> table
 local function loadDictionary(sourcefile)
   local file = dofile(sourcefile)
 
@@ -27,7 +27,7 @@ function tablelocalizationmanager.TableLocalization(source, language)
   newLocalization.children = {}
   newLocalization.language = language or ""
   newLocalization.source = source
-  newLocalization._loadDictionary = loadDictionary
+  newLocalization.dictionary = loadDictionary
 
   return newLocalization
 end
