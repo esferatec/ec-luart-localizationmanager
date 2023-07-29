@@ -1,3 +1,4 @@
+-- Represents the base module for all localization managers.
 local localizationmanager = {}
 
 -- Defines specific error massages.
@@ -9,11 +10,11 @@ localizationmanager.ERRORMESSAGE = {
 -- Checks if the parameter is a valid child widget.
 -- isValidChild(parameter: any) -> boolean
 function localizationmanager.isValidChild(parameter)
-  local widgetType = type(parameter)
-  local validWidgets = { "Label", "Button", "Checkbox", "Radiobutton", "Groupbox", "MenuItem", "TabItem" }
+  local childType = type(parameter)
+  local validTypes = { "Label", "Button", "Checkbox", "Radiobutton", "Groupbox", "MenuItem", "TabItem" }
 
-  for _, validWidget in pairs(validWidgets) do
-    if string.find(widgetType, validWidget) then return true end
+  for _, validType in ipairs(validTypes) do
+    if string.find(childType, validType) then return true end
   end
 
   return false
@@ -25,26 +26,28 @@ function localizationmanager.isString(parameter)
   return type(parameter) == "string"
 end
 
--- Defines the base localization prototype.
-local BaseLocalization = {
-  children = {},
-  language = "",
-  source = "",
-  dictionary = {}
-}
-BaseLocalization.__index = BaseLocalization
+-- Defines the base localization object.
+local BaseLocalization = Object({})
 
--- Adds a child widget and key.
--- add(child: table, key: string) -> none
-function BaseLocalization:add(child, key)
-  assert(localizationmanager.isValidChild(child), localizationmanager.ERRORMESSAGE.notvalidchild .. "child")
+-- Creates the base localization constructor.
+function BaseLocalization:constructor(source, language)
+  self.source = source
+  self.language = language or ""
+  self.children = {}
+  self.dictionary = {}
+end
+
+-- Adds a widget and key.
+-- add(widget: object, key: string) -> none
+function BaseLocalization:add(widget, key)
+  assert(localizationmanager.isValidChild(widget), localizationmanager.ERRORMESSAGE.notvalidchild .. "child")
   assert(localizationmanager.isString(key), localizationmanager.ERRORMESSAGE.notstring .. "key")
 
-  local newWidget = {}
-  newWidget.widget = child
-  newWidget.key = key
+  local newChild = {}
+  newChild.widget = widget
+  newChild.key = key
 
-  table.insert(self.children, newWidget)
+  table.insert(self.children, newChild)
 end
 
 -- Sets the language.
@@ -73,7 +76,7 @@ function BaseLocalization:getSource()
   return self.source
 end
 
--- Sets the current locale for the application.
+-- Sets the current locale.
 -- setLocale() -> none
 function BaseLocalization:setLocale()
   if not os.setlocale(self.language, "all") then
@@ -81,35 +84,41 @@ function BaseLocalization:setLocale()
   end
 end
 
--- Gets the current locale of the application.
+-- Gets the current locale.
 -- getLocale() -> string
 function BaseLocalization:getLocale()
   return os.setlocale(nil)
 end
 
+-- Loads the locilization dictionary.
+-- load() -> none
+function BaseLocalization:load()
+  -- Must be implied and overwritten in each localization manager.
+end
+
 -- Sets the translated text for each widget.
--- translate() -> none
-function BaseLocalization:translate()
-  local dictionary = {}
-
-  if self.source ~= "" then
-    dictionary = self.dictionary(self.source)
-  end
-
-  if next(dictionary) == nil then
+-- apply() -> none
+function BaseLocalization:apply()
+  if next(self.dictionary) == nil then
     return
   end
 
   for _, child in ipairs(self.children) do
-    local translatedText = dictionary[child.key]
+    local translatedText = self.dictionary[child.key]
     if translatedText then child.widget.text = translatedText end
   end
 end
 
--- Initializes a new base localization class.
--- BaseLocalization() -> table
+-- Clears the localization dictionary.
+-- clear() -> none
+function BaseLocalization:clear()
+  self.dictionary = {}
+end
+
+-- Initializes a new base localization instance.
+-- BaseLocalization() -> object
 function localizationmanager.BaseLocalization()
-  return setmetatable({}, BaseLocalization)
+  return BaseLocalization()
 end
 
 return localizationmanager

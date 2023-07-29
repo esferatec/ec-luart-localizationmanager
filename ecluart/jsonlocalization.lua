@@ -1,38 +1,50 @@
-local lm = require("ecluart.localizationmanager")
 local json = require("json")
+local sys = require("sys")
+local lm = require("ecluart.localizationmanager")
 
+-- Defines a JSON localization manager.
 local jsonlocalizationmanager = {}
 
--- Loads the dictionary from the json file.
--- loadDictionary(sourcefile: string) -> table
-local function loadDictionary(sourcefile)
-  local file = io.open(sourcefile, "r")
+-- Defines the json localization object.
+local JsonLocalization = Object(lm.BaseLocalization())
 
-  if file == nil or type(file) ~= "table" then
+-- Overrides the base localization constructor.
+function JsonLocalization:constructor(source, language)
+  super(self).constructor(self, source, language)
+end
+
+-- Loads the localization dictionary from a json file.
+-- load(source: string) -> none
+function JsonLocalization:load()
+  if not self.source or self.source == "" then
     return {}
   end
 
-  local contents = file:read("a")
+  if type(self.source) ~= "string" then
+    return {}
+  end
+
+  local file = sys.File(self.source)
+
+  if not file.exists then
+    file:close()
+    return {}
+  end
+
+  file:open("read", "utf8")
+
+  local content = file:read()
+
   file:close()
-  return json.decode(contents) or {}
+
+  self.dictionary = json.decode(content) or {}
 end
 
--- Defines the metatable.
-local JsonLocalization = lm.BaseLocalization()
-JsonLocalization.__index = JsonLocalization
-
--- Initializes a new json localizer instance.
--- JsonLocalization(source: string, language?: string) -> table
+-- Initializes a new json localization instance.
+-- JsonLocalization(source: string, language?: string) -> object
 function jsonlocalizationmanager.JsonLocalization(source, language)
   assert(lm.isString(source), lm.ERRORMESSAGE.notstring .. "source")
-
-  local newLocalization = setmetatable({}, JsonLocalization)
-  newLocalization.children = {}
-  newLocalization.language = language or ""
-  newLocalization.source = source
-  newLocalization.dictionary = loadDictionary
-
-  return newLocalization
+  return JsonLocalization(source, language)
 end
 
 return jsonlocalizationmanager
