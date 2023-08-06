@@ -51,7 +51,7 @@ function LocalizationManager:constructor(dictionary, language)
 
   function self:set_dictionary(value)
     if not isTable(value) then
-      _dictionary = next(_dictionary) == nil and {} or _dictionary
+      _dictionary = next(_dictionary) ~= nil and _dictionary or {}
       return
     end
 
