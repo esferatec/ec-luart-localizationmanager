@@ -1,32 +1,24 @@
 -- Defines a localization management module.
 local lm = {}
 
-lm.customtypes = {}
-
 -- Checks if the parameter is a valid child widget.
 -- isValidChild(parameter: any) -> boolean
 local function isValidChild(parameter)
   local childType = type(parameter)
-  local validTypes = {
-    "Edit",
-    "Entry",
-    "Label",
-    "Button",
-    "Checkbox",
-    "Radiobutton",
-    "Groupbox" }
+  local invalidTypes = {
+    "nil",
+    "boolean",
+    "number",
+    "string",
+    "userdata",
+    "function",
+    "thread" }
 
-  if type(lm.customtypes) == "table" then
-    for _, value in ipairs(lm.customtypes) do
-      table.insert(validTypes, tostring(value))
-    end
+  for _, invalidType in ipairs(invalidTypes) do
+    if string.find(childType, invalidType) then return false end
   end
 
-  for _, validType in ipairs(validTypes) do
-    if string.find(childType, validType) then return true end
-  end
-
-  return false
+  return true
 end
 
 -- Checks if the parameter is a table type.
@@ -103,6 +95,19 @@ function LocalizationManager:apply()
   for _, child in ipairs(self.children) do
     local translatedText = self.dictionary[child.key]
     if translatedText then child.widget[child.property] = translatedText end
+  end
+end
+
+-- Gets the translated text for a key.
+-- translate(key: string) -> string
+function LocalizationManager:translate(key)
+  if not isString(key) then return "" end
+
+  local translatedText = self.dictionary[key]
+  if not translatedText then
+    return ""
+  else
+    return translatedText
   end
 end
 

@@ -1,0 +1,53 @@
+# ec-luart-localizationmanager
+
+The code is a Lua module for managing localization. It defines a LocalizationManager object that handles the translation of text in different languages.
+
+## Constructor
+
+```Lua
+ LocalizationManager(dictionary: table, language?: string) -> object
+```
+
+The code above initializes a new instance of the localization manager. It defines a function LocalizationManager that takes two parameters: dictionary and language. The dictionary parameter is expected to be a table containing the localization data, while the language parameter is an optional string specifying the desired language.
+
+The function returns an object that represents the localization manager instance. This object can be used to access and manage the localized strings based on the provided dictionary and language.
+
+## Method - add
+
+```Lua
+LocalizationManager:add(widget: object, key: string) -> none
+```
+
+This function adds a widget and its corresponding localization key to the LocalizationManager object. It takes three parameters: widget (an object representing the widget), property (a string representing the property of the widget to be localized), and key (a string representing the localization key). It first checks if the widget is a valid child object, and if property and key are strings. If any of these conditions are not met, the function returns early. Otherwise, it creates a new table and assigns the widget, property, and key to its respective properties. Finally, it inserts the table into the children table of the LocalizationManager object.
+
+## Method - apply
+
+```Lua
+LocalizationManager:apply() -> none
+```
+
+This function sets the translated text for each widget in the LocalizationManager object. It first checks if the dictionary table is empty. If it is empty, the function returns early. Otherwise, it iterates over each child object in the children table. It retrieves the translated text for the child's key from the dictionary table and assigns it to the corresponding property of the child's widget.
+
+## Method - translate
+
+```Lua
+LocalizationManager:translate(key: string) -> string
+```
+
+This function retrieves the translated text for a given key from the LocalizationManager object. It takes one parameter: key (a string representing the localization key). If the key is not a string, the function returns an empty string. Otherwise, it retrieves the translated text for the key from the dictionary table. If the translated text is not found, it returns an empty string; otherwise, it returns the translated text.
+
+## Method - setlocale
+
+```Lua
+LocalizationManager:setlocale() -> none
+```
+
+This function sets the current locale of the LocalizationManager object. It uses the os.setlocale function to set the locale to the value of the language property. If the locale cannot be set, it sets the language property to the system's default locale.
+
+## Method - getlocale
+
+```Lua
+LocalizationManager:getlocale() -> string
+```
+
+This function retrieves the current locale of the LocalizationManager object using the os.setlocale function.
