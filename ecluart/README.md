@@ -1,4 +1,4 @@
-# ec-luart-localizationmanager
+# LM.LUA
 
 The code is a Lua module for managing localization. It defines a LocalizationManager object that handles the translation of text in different languages.
 
