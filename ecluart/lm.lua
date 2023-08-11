@@ -72,7 +72,7 @@ function LocalizationManager:constructor(dictionary, language)
   self.children = {}
 end
 
--- Adds a widget and localization key.
+-- Adds a widget, property and localization key.
 -- add(widget: object, key: string) -> none
 function LocalizationManager:add(widget, property, key)
   if not isValidChild(widget) then return end
