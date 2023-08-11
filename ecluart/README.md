@@ -15,7 +15,7 @@ The function returns an object that represents the localization manager instance
 ## Method - add
 
 ```Lua
-LocalizationManager:add(widget: object, key: string) -> none
+LocalizationManager:add(widget: object, property: string, key: string) -> none
 ```
 
 This function adds a widget and its corresponding localization key to the LocalizationManager object. It takes three parameters: widget (an object representing the widget), property (a string representing the property of the widget to be localized), and key (a string representing the localization key). It first checks if the widget is a valid child object, and if property and key are strings. If any of these conditions are not met, the function returns early. Otherwise, it creates a new table and assigns the widget, property, and key to its respective properties. Finally, it inserts the table into the children table of the LocalizationManager object.

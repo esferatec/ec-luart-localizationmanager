@@ -5,7 +5,7 @@ The project is a localization management module written in Lua. It defines a Loc
 ![Screenshot of the Regisatrtion Form](/readme.png)
 
 [![Lua 5.4](https://badgen.net/badge/Lua/5.4/yellow)](https://github.com/lua/lua)
-[![LuaRT 1.5.0](https://badgen.net/badge/LuaRT/1.5.0/blue)](https://github.com/samyeyo/LuaRT)
+[![LuaRT 1.5.1](https://badgen.net/badge/LuaRT/1.5.1/blue)](https://github.com/samyeyo/LuaRT)
 [![LuaCheck 1.1.1](https://badgen.net/badge/LuaCheck/1.1.1/green)](https://github.com/lunarmodules/luacheck)
 
 ## Features
