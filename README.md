@@ -33,7 +33,7 @@ The project provides a modular and flexible way to manage localization in deskto
 The localization manager (lm) can be loaded using the function *require()*:
 
 ```lua
-local lm = require("eclua.lm") 
+local lm = require("ecluart.lm") 
 ```
 
 ## License
