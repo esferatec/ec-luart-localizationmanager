@@ -104,11 +104,9 @@ function LocalizationManager:translate(key)
   if not isString(key) then return "" end
 
   local translatedText = self.dictionary[key]
-  if not translatedText then
-    return ""
-  else
-    return translatedText
-  end
+  if not translatedText then return "" end
+
+  return translatedText
 end
 
 -- Sets the current locale.

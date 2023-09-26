@@ -38,6 +38,12 @@ local lblAge = ui.Label(winMain, "Age:", 10, 89)
 local lblEmail = ui.Label(winMain, "Email:", 10, 121)
 local lblCountry = ui.Label(winMain, "Country:", 10, 153)
 
+lblName.textalign = "left"
+lblPassword.textalign = "left"
+lblAge.textalign = "left"
+lblEmail.textalign = "left"
+lblCountry.textalign = "left"
+
 local btnApply = ui.Button(winMain, "Apply Localization", 10, 210, 380)
 --#endregion main window
 
