@@ -1,11 +1,11 @@
 # ec-luart-localizationmanager
 
-The project is a localization management module written in Lua. It defines a LocalizationManager object that handles localization of widgets in LuaRT desktop applications.
+The project is a localization management module written in Lua and LauRT. It defines a LocalizationManager object that handles localization of widgets in LuaRT desktop applications.
 
 ![example](/readme.png)
 
 [![Lua 5.4.6](https://badgen.net/badge/Lua/5.4.6/yellow)](https://github.com/lua/lua)
-[![LuaRT 1.5.2](https://badgen.net/badge/LuaRT/1.5.2/blue)](https://github.com/samyeyo/LuaRT)
+[![LuaRT 1.6.0](https://badgen.net/badge/LuaRT/1.6.0/blue)](https://github.com/samyeyo/LuaRT)
 [![LuaCheck 1.1.1](https://badgen.net/badge/LuaCheck/1.1.1/green)](https://github.com/lunarmodules/luacheck)
 
 ## Features
@@ -18,7 +18,7 @@ The project provides a modular and flexible way to manage localization in deskto
 2. Copy the "lm.lua" file into this folder.
 
 ```text
-[programm]
+[application]
 |
 |----ecluart
 |   |
