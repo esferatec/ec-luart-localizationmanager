@@ -5,12 +5,12 @@ The project is a localization management module written in Lua and LauRT. It def
 ![example](/readme.png)
 
 [![Lua 5.4.6](https://badgen.net/badge/Lua/5.4.6/yellow)](https://github.com/lua/lua)
-[![LuaRT 1.6.0](https://badgen.net/badge/LuaRT/1.6.0/blue)](https://github.com/samyeyo/LuaRT)
+[![LuaRT 1.7.0](https://badgen.net/badge/LuaRT/1.7.0/blue)](https://github.com/samyeyo/LuaRT)
 [![LuaCheck 1.1.1](https://badgen.net/badge/LuaCheck/1.1.1/green)](https://github.com/lunarmodules/luacheck)
 
 ## Features
 
-The project provides a modular and flexible way to manage localization in desktop applications. It allows for easy addition of widgets and their corresponding localization keys, as well as applying translations to the widgets. The localization manager can be customized by providing a dictionary table with translations and a language string. Several localization managers can be used in one application.
+The project provides a modular and flexible way to manage localization in desktop applications. It allows easy addition of widgets and their corresponding localization keys, as well as applying translations to the widgets. The localization manager can be customized by providing a dictionary table with translations and a language string. Several localization managers can be used in one application.
 
 ## Installation
 

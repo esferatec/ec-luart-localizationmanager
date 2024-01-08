@@ -62,7 +62,7 @@ lomMenu:add(mnuFile.items[3], "text", "exit")
 function btnApply:onClick()
   lomLabel:apply()
   lomMenu:apply()
-  lomLabel:setlocale()
+  os.setlocale(lomLabel.language, "all")
   etyName.text = 99.99
 end
 

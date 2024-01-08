@@ -57,7 +57,7 @@ lomMenu:add(mnuFile.items[3], "text", "exit") -- Add the third item of the subme
 function btnApply:onClick() -- Define the onClick event handler for the button
   lomLabel:apply() -- Apply the localized labels
   lomMenu:apply() -- Apply the localized menu items
-  lomLabel:setlocale() -- Set the locale for the label localization manager
+  os.setlocale(lomLabel.language, "all") -- Set the locale for the application
   etyName.text = 99.99 -- Set the text of the name entry field to "99.99"
 end
 

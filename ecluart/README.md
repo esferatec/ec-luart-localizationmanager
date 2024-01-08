@@ -35,19 +35,3 @@ LocalizationManager:translate(key: string) -> string
 ```
 
 This function retrieves the translated text for a given key from the LocalizationManager object. It takes one parameter: key (a string representing the localization key). If the key is not a string, the function returns an empty string. Otherwise, it retrieves the translated text for the key from the dictionary table. If the translated text is not found, it returns an empty string; otherwise, it returns the translated text.
-
-## Method - setlocale
-
-```Lua
-LocalizationManager:setlocale() -> none
-```
-
-This function sets the current locale of the LocalizationManager object. It uses the os.setlocale function to set the locale to the value of the language property. If the locale cannot be set, it sets the language property to the system's default locale.
-
-## Method - getlocale
-
-```Lua
-LocalizationManager:getlocale() -> string
-```
-
-This function retrieves the current locale of the LocalizationManager object using the os.setlocale function.

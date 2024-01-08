@@ -1,3 +1,5 @@
+local ui = require("ui")
+
 -- Defines a localization management module.
 local lm = {}
 
@@ -43,8 +45,7 @@ function LocalizationManager:constructor(dictionary, language)
 
   function self:set_dictionary(value)
     if not isTable(value) then
-      _dictionary = next(_dictionary) ~= nil and _dictionary or {}
-      return
+      value = {}
     end
 
     _dictionary = value
@@ -55,12 +56,11 @@ function LocalizationManager:constructor(dictionary, language)
   end
 
   function self:set_language(value)
-    if not isString(value) then
-      _language = _language ~= "" and _language or os.setlocale("")
-      return
+    if not isString(value) or value ~= "" then
+      value = os.setlocale("")
     end
 
-    _language = value ~= "" and value or os.setlocale("")
+    _language = value
   end
 
   function self:get_language()
@@ -107,20 +107,6 @@ function LocalizationManager:translate(key)
   if not translatedText then return "" end
 
   return translatedText
-end
-
--- Sets the current locale.
--- setlocale() -> none
-function LocalizationManager:setlocale()
-  if not os.setlocale(self.language, "all") then
-    self.language = os.setlocale("", "all")
-  end
-end
-
--- Gets the current locale.
--- getlocale() -> string
-function LocalizationManager:getlocale()
-  return os.setlocale(nil)
 end
 
 -- Initializes a new localization manager instance.
