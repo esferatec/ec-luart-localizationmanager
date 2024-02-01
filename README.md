@@ -1,6 +1,6 @@
 # ec-luart-localizationmanager
 
-The project is a localization management module written in Lua and LauRT. It defines a LocalizationManager object that handles localization of widgets in LuaRT desktop applications.
+The project is a localization management module written in Lua. It defines a LocalizationManager object that handles localization of widgets in LuaRT desktop applications.
 
 ![example](/readme.png)
 

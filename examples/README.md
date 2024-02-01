@@ -25,8 +25,8 @@ winMain.menu = ui.Menu("File", "Edit") -- Create a menu for the main window with
 local mnuFile =  ui.Menu("New", "Save", "Exit") -- Create a submenu for the "File" option with "New", "Save", and "Exit" options
 winMain.menu.items[1].submenu = mnuFile -- Assign the submenu to the first item of the main menu
 
-local lomLabel = lm.LocalizationManager(dic_label, "German_Germany") -- Create a localization manager for labels with the German language and Germany region
-local lomMenu = lm.LocalizationManager(dic_menu, "German_Germany") -- Create a localization manager for menu items with the German language and Germany region
+local lomLabel = lm.LocalizationManager() -- Create a localization manager for labels
+local lomMenu = lm.LocalizationManager(dic_menu, "German_Germany") -- Create a localization manager for menu items
 
 local etyName = ui.Entry(winMain, "", 100, 20, 180) -- Create an entry field for the name with a width of 100, positioned at (20, 180)
 local etyPassword = ui.Entry(winMain, "", 100, 52, 180) -- Create an entry field for the password with a width of 100, positioned at (52, 180)
@@ -55,8 +55,8 @@ lomMenu:add(mnuFile.items[2], "text", "save") -- Add the second item of the subm
 lomMenu:add(mnuFile.items[3], "text", "exit") -- Add the third item of the submenu to the localization manager with the key "exit"
 
 function btnApply:onClick() -- Define the onClick event handler for the button
-  lomLabel:apply() -- Apply the localized labels
-  lomMenu:apply() -- Apply the localized menu items
+  lomLabel:apply(dic_label, "German_Germany") -- Apply the localized labels
+  lomMenu:apply(dic_label, "German_Germany") -- Apply the localized menu items
   os.setlocale(lomLabel.language, "all") -- Set the locale for the application
   etyName.text = 99.99 -- Set the text of the name entry field to "99.99"
 end

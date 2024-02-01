@@ -5,12 +5,10 @@ The code is a Lua module for managing localization. It defines a LocalizationMan
 ## Constructor
 
 ```Lua
- LocalizationManager(dictionary: table, language?: string) -> object
+ LocalizationManager() -> object
 ```
 
-The code above initializes a new instance of the localization manager. It defines a function LocalizationManager that takes two parameters: dictionary and language. The dictionary parameter is expected to be a table containing the localization data, while the language parameter is an optional string specifying the desired language.
-
-The function returns an object that represents the localization manager instance. This object can be used to access and manage the localized strings based on the provided dictionary and language.
+The code above initializes a new instance of the localization manager. It returns the newly created object.
 
 ## Method - add
 
@@ -23,10 +21,10 @@ This function adds a widget and its corresponding localization key to the Locali
 ## Method - apply
 
 ```Lua
-LocalizationManager:apply() -> none
+LocalizationManager:apply(dictionary: table, language?: string) -> none
 ```
 
-This function sets the translated text for each widget in the LocalizationManager object. It first checks if the dictionary table is empty. If it is empty, the function returns early. Otherwise, it iterates over each child object in the children table. It retrieves the translated text for the child's key from the dictionary table and assigns it to the corresponding property of the child's widget.
+This function sets the translated text for each widget in the LocalizationManager object. It defines a function  that takes two parameters: dictionary and language. The dictionary parameter is expected to be a table containing the localization data, while the language parameter is an optional string specifying the desired language. It first checks if the dictionary table is empty. If it is empty, the function returns early. Otherwise, it iterates over each child object in the children table. It retrieves the translated text for the child's key from the dictionary table and assigns it to the corresponding property of the child's widget.
 
 ## Method - translate
 

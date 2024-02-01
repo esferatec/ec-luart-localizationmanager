@@ -1,5 +1,3 @@
-local ui = require("ui")
-
 -- Defines a localization management module.
 local lm = {}
 
@@ -39,7 +37,7 @@ end
 local LocalizationManager = Object({})
 
 -- Creates the localization manager constructor.
-function LocalizationManager:constructor(dictionary, language)
+function LocalizationManager:constructor()
   local _dictionary = {}
   local _language = ""
 
@@ -56,7 +54,7 @@ function LocalizationManager:constructor(dictionary, language)
   end
 
   function self:set_language(value)
-    if not isString(value) or value ~= "" then
+    if not isString(value) or value == "" then
       value = os.setlocale("")
     end
 
@@ -67,8 +65,6 @@ function LocalizationManager:constructor(dictionary, language)
     return _language
   end
 
-  self.language = language
-  self.dictionary = dictionary
   self.children = {}
 end
 
@@ -88,14 +84,21 @@ function LocalizationManager:add(widget, property, key)
 end
 
 -- Sets the translated text for each widget.
--- apply() -> none
-function LocalizationManager:apply()
+-- apply(dictionary: table, language?: string) -> none
+function LocalizationManager:apply(dictionary, language)
+  self.dictionary = dictionary
+  self.language = language
+
   if next(self.dictionary) == nil then return end
 
   for _, child in ipairs(self.children) do
     local translatedText = self.dictionary[child.key]
-    if translatedText then child.widget[child.property] = translatedText end
+    if translatedText then
+      child.widget[child.property] = translatedText
+    end
   end
+
+  os.setlocale(self.language, "all")
 end
 
 -- Gets the translated text for a key.
@@ -110,9 +113,9 @@ function LocalizationManager:translate(key)
 end
 
 -- Initializes a new localization manager instance.
--- LocalizationManager(dictionary: table, language?: string) -> object
-function lm.LocalizationManager(dictionary, language)
-  return LocalizationManager(dictionary, language)
+-- LocalizationManager() -> object
+function lm.LocalizationManager()
+  return LocalizationManager(33333)
 end
 
 return lm

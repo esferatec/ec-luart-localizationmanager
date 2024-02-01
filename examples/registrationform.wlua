@@ -23,8 +23,8 @@ winMain.menu = ui.Menu("File", "Edit")
 local mnuFile =  ui.Menu("New", "Save", "Exit")
 winMain.menu.items[1].submenu = mnuFile
 
-local lomLabel = lm.LocalizationManager(dic_label, "German_Germany")
-local lomMenu = lm.LocalizationManager(dic_menu, "German_Germany")
+local lomLabel = lm.LocalizationManager()
+local lomMenu = lm.LocalizationManager()
 
 local etyName = ui.Entry(winMain, "", 100, 20, 180)
 local etyPassword = ui.Entry(winMain, "", 100, 52, 180)
@@ -60,8 +60,8 @@ lomMenu:add(mnuFile.items[2], "text", "save")
 lomMenu:add(mnuFile.items[3], "text", "exit")
 
 function btnApply:onClick()
-  lomLabel:apply()
-  lomMenu:apply()
+  lomLabel:apply(dic_label, "German_Germany")
+  lomMenu:apply(dic_menu, "German_Germany")
   os.setlocale(lomLabel.language, "all")
   etyName.text = 99.99
 end
