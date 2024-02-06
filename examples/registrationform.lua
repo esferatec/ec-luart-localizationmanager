@@ -65,7 +65,7 @@ function btnApply:onClick()
   lomLabel:apply()
   lomMenu.dictionary = dic_menu
   lomMenu.language = "German_Germany"
-  lomMenu:apply(dic_menu, "German_Germany")
+  lomMenu:apply()
   etyName.text = 99.99
 end
 

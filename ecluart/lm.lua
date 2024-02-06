@@ -35,7 +35,7 @@ local LocalizationManager = Object({})
 -- Creates the localization manager constructor.
 function LocalizationManager:constructor()
   local _dictionary = {}
-  local _language = ""
+  local _language = os.setlocale("")
 
   function self:set_dictionary(value)
     if not isTable(value) then
