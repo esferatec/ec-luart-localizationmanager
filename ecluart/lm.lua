@@ -4,7 +4,6 @@ local lm = {}
 -- Checks if the parameter is a valid child widget.
 -- isValidChild(parameter: any) -> boolean
 local function isValidChild(parameter)
-  local childType = type(parameter)
   local invalidTypes = {
     "nil",
     "boolean",
