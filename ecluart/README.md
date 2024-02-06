@@ -10,6 +10,22 @@ The code is a Lua module for managing localization. It defines a LocalizationMan
 
 The code above initializes a new instance of the localization manager. It returns the newly created object.
 
+## Property -  dictionary
+
+```Lua
+LocalizationManager.dictionary (table)
+```
+
+The dictionary property is expected to be a table containing the localization data.
+
+## Property -  language
+
+```Lua
+LocalizationManager.language (string)
+```
+
+the language property is an string specifying the desired language.
+
 ## Method - add
 
 ```Lua
@@ -24,7 +40,7 @@ This function adds a widget and its corresponding localization key to the Locali
 LocalizationManager:apply(dictionary: table, language?: string) -> none
 ```
 
-This function sets the translated text for each widget in the LocalizationManager object. It defines a function  that takes two parameters: dictionary and language. The dictionary parameter is expected to be a table containing the localization data, while the language parameter is an optional string specifying the desired language. It first checks if the dictionary table is empty. If it is empty, the function returns early. Otherwise, it iterates over each child object in the children table. It retrieves the translated text for the child's key from the dictionary table and assigns it to the corresponding property of the child's widget.
+This function sets the translated text for each widget in the LocalizationManager object. It iterates over each child object in the children table. It retrieves the translated text for the child's key from the dictionary table and assigns it to the corresponding property of the child's widget.
 
 ## Method - translate
 

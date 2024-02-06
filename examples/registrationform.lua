@@ -60,9 +60,12 @@ lomMenu:add(mnuFile.items[2], "text", "save")
 lomMenu:add(mnuFile.items[3], "text", "exit")
 
 function btnApply:onClick()
-  lomLabel:apply(dic_label, "German_Germany")
+  lomLabel.dictionary = dic_label
+  lomLabel.language = "German_Germany"
+  lomLabel:apply()
+  lomMenu.dictionary = dic_menu
+  lomMenu.language = "German_Germany"
   lomMenu:apply(dic_menu, "German_Germany")
-  os.setlocale(lomLabel.language, "all")
   etyName.text = 99.99
 end
 

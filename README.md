@@ -10,7 +10,7 @@ The project is a localization management module written in Lua. It defines a Loc
 
 ## Features
 
-The project provides a modular and flexible way to manage localization in desktop applications. It allows easy addition of widgets and their corresponding localization keys, as well as applying translations to the widgets. The localization manager can be customized by providing a dictionary table with translations and a language string. Several localization managers can be used in one application.
+The project provides a modular and flexible way to manage localization in desktop applications. It allows easy addition of widgets and their corresponding localization keys, as well as applying translations text. Several localization managers can be used in one application.
 
 ## Installation
 

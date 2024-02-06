@@ -14,23 +14,19 @@ local function isValidChild(parameter)
     "function",
     "thread" }
 
-  for _, invalidType in ipairs(invalidTypes) do
-    if string.find(childType, invalidType) then return false end
-  end
-
-  return true
-end
-
--- Checks if the parameter is a table type.
--- isTable(parameter: any) -> boolean
-local function isTable(parameter)
-  return type(parameter) == "table"
+    return not table.concat(invalidTypes, ","):find(type(parameter))
 end
 
 -- Checks if the parameter is a string type.
 -- isString(parameter: any) -> boolean
 local function isString(parameter)
   return type(parameter) == "string"
+end
+
+-- Checks if the parameter is a table type.
+-- isTable(parameter: any) -> boolean
+local function isTable(parameter)
+  return type(parameter) == "table"
 end
 
 -- Defines the localization manager object.
@@ -75,20 +71,18 @@ function LocalizationManager:add(widget, property, key)
   if not isString(property) then return end
   if not isString(key) then return end
 
-  local newChild = {}
-  newChild.widget = widget
-  newChild.property = property
-  newChild.key = key
+  local newChild = {
+    widget = widget,
+    property = property,
+    key = key
+  }
 
   table.insert(self.children, newChild)
 end
 
 -- Sets the translated text for each widget.
 -- apply(dictionary: table, language?: string) -> none
-function LocalizationManager:apply(dictionary, language)
-  self.dictionary = dictionary
-  self.language = language
-
+function LocalizationManager:apply()
   if next(self.dictionary) == nil then return end
 
   for _, child in ipairs(self.children) do
@@ -105,11 +99,7 @@ end
 -- translate(key: string) -> string
 function LocalizationManager:translate(key)
   if not isString(key) then return "" end
-
-  local translatedText = self.dictionary[key]
-  if not translatedText then return "" end
-
-  return translatedText
+  return self.dictionary[key] or ""
 end
 
 -- Initializes a new localization manager instance.
