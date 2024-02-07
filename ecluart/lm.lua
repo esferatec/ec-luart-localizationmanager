@@ -13,7 +13,7 @@ local function isValidChild(parameter)
     "function",
     "thread" }
 
-    return not table.concat(invalidTypes, ","):find(type(parameter))
+  return not table.concat(invalidTypes, ","):find(type(parameter))
 end
 
 -- Checks if the parameter is a string type.
