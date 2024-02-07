@@ -104,7 +104,7 @@ end
 -- Initializes a new localization manager instance.
 -- LocalizationManager() -> object
 function lm.LocalizationManager()
-  return LocalizationManager(33333)
+  return LocalizationManager()
 end
 
 return lm
