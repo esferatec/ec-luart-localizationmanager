@@ -10,7 +10,7 @@ The code is a Lua module for managing localization. It defines a LocalizationMan
 
 The code above initializes a new instance of the localization manager. It returns the newly created object.
 
-## Property -  dictionary
+## Property - dictionary
 
 ```Lua
 LocalizationManager.dictionary (table)
@@ -18,7 +18,7 @@ LocalizationManager.dictionary (table)
 
 The dictionary property is expected to be a table containing the localization data.
 
-## Property -  language
+## Property - language
 
 ```Lua
 LocalizationManager.language (string)
