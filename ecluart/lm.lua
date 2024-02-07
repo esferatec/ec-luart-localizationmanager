@@ -80,7 +80,7 @@ function LocalizationManager:add(widget, property, key)
 end
 
 -- Sets the translated text for each widget.
--- apply(dictionary: table, language?: string) -> none
+-- apply() -> none
 function LocalizationManager:apply()
   if next(self.dictionary) == nil then return end
 
