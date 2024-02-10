@@ -1,5 +1,5 @@
 -- Defines a localization management module.
-local lm = {}
+local lm = {} -- version 2.0
 
 -- Checks if the parameter is a valid child widget.
 -- isValidChild(parameter: any) -> boolean
@@ -82,8 +82,6 @@ end
 -- Sets the translated text for each widget.
 -- apply() -> none
 function LocalizationManager:apply()
-  if next(self.dictionary) == nil then return end
-
   for _, child in ipairs(self.children) do
     local translatedText = self.dictionary[child.key]
     if translatedText then
