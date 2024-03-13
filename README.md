@@ -69,7 +69,7 @@ This function adds a widget and its corresponding localization key to the Locali
 ## Method - apply
 
 ```Lua
-LocalizationManager:apply(dictionary: table, language?: string) -> none
+LocalizationManager:apply() -> none
 ```
 
 This function sets the translated text for each widget in the LocalizationManager object. It iterates over each child object in the children table. It retrieves the translated text for the child's key from the dictionary table and assigns it to the corresponding property of the child's widget.
