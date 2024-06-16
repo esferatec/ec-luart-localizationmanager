@@ -1,5 +1,5 @@
 -- Defines a localization management module.
-local lm = {} -- version 2.0
+local lm = {} -- version 2024.01
 
 -- Checks if the parameter is a valid child widget.
 -- isValidChild(parameter: any) -> boolean
