@@ -2,7 +2,7 @@
 
 The project is a localization management module written in Lua. It defines a LocalizationManager object that handles localization of widgets in LuaRT desktop applications.
 
-[![LuaRT 1.9.5](https://badgen.net/badge/LuaRT/2.0.0/blue)](https://github.com/samyeyo/LuaRT)
+[![LuaRT 2.1.0](https://badgen.net/badge/LuaRT/2.1.0/blue)](https://github.com/samyeyo/LuaRT)
 
 ## Features
 
