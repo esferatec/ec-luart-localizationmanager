@@ -1,5 +1,5 @@
 -- Defines a localization management module.
-local lm = {} -- version 2025.04
+local lm = {} -- version 2025.11
 
 -- Checks if the parameter is a valid child widget.
 -- isValidChild(parameter: any) -> boolean
@@ -18,14 +18,14 @@ end
 
 -- Checks if the parameter is a string type.
 -- isString(parameter: any) -> boolean
-local function isString(parameter)
+local function isStringType(parameter)
   return type(parameter) == "string"
 end
 
--- Checks if the parameter is a table type.
--- isTable(parameter: any) -> boolean
-local function isTable(parameter)
-  return type(parameter) == "table"
+-- Checks if the parameter is a nil type.
+-- isNilType(parameter: any) -> boolean
+local function isNilType(parameter)
+  return type(parameter) == "nil"
 end
 
 -- Defines the localization manager object.
@@ -33,33 +33,8 @@ local LocalizationManager = Object({})
 
 -- Creates the localization manager constructor.
 function LocalizationManager:constructor()
-  local _dictionary = {}
-  local _language = os.setlocale("")
-
-  function self:set_dictionary(value)
-    if not isTable(value) then
-      value = {}
-    end
-
-    _dictionary = value
-  end
-
-  function self:get_dictionary()
-    return _dictionary
-  end
-
-  function self:set_language(value)
-    if not isString(value) or value == "" then
-      value = os.setlocale("")
-    end
-
-    _language = value
-  end
-
-  function self:get_language()
-    return _language
-  end
-
+  self.dictionary = {}
+  self.language = os.setlocale("")
   self.children = {}
 end
 
@@ -67,8 +42,8 @@ end
 -- add(widget: object, property: string, key: string) -> none
 function LocalizationManager:add(widget, property, key)
   if not isValidChild(widget) then return end
-  if not isString(property) then return end
-  if not isString(key) then return end
+  if not isStringType(property) then return end
+  if not isStringType(key) then return end
 
   local newChild = {
     widget = widget,
@@ -84,7 +59,8 @@ end
 function LocalizationManager:apply()
   for _, child in ipairs(self.children) do
     local translatedText = self.dictionary[child.key]
-    if translatedText then
+
+    if not isNilType(translatedText) then
       child.widget[child.property] = translatedText
     end
   end
@@ -95,7 +71,7 @@ end
 -- Gets the translated text for a key.
 -- translate(key: string) -> string
 function LocalizationManager:translate(key)
-  if not isString(key) then return "" end
+  if not isStringType(key) then return "" end
   return self.dictionary[key] or ""
 end
 
