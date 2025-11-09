@@ -58,7 +58,7 @@ function LocalizationManager:add(widget, property, key)
 end
 
 -- Loads the localization text for each widget.
--- apply() -> none
+-- translate() -> none
 function LocalizationManager:translate()
   for _, child in ipairs(self.children) do
     local localizationText = self.dictionary[child.key]
@@ -69,7 +69,7 @@ function LocalizationManager:translate()
 end
 
 -- Gets the localization text for a key.
--- translate(key: string) -> string
+-- text(key: string) -> string
 function LocalizationManager:text(key)
   if not isStringType(key) then return end
   if key == "" then return end
