@@ -62,7 +62,7 @@ end
 function LocalizationManager:translate()
   for _, child in ipairs(self.children) do
     local localizationText = self.dictionary[child.key]
-    child.widget[child.property] = localizationText
+    child.widget[child.property] = localizationText and localizationText or ""
   end
 
   os.setlocale(self.language, "all")
