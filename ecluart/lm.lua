@@ -5,15 +5,16 @@ local lm = {} -- version 2025.11
 -- isValidChild(parameter: any) -> boolean
 local function isValidChild(parameter)
   local invalidTypes = {
-    "nil",
-    "boolean",
-    "number",
-    "string",
-    "userdata",
-    "function",
-    "thread" }
+    ["nil"] = true,
+    ["boolean"] = true,
+    ["number"] = true,
+    ["string"] = true,
+    ["userdata"] = true,
+    ["function"] = true,
+    ["thread"] = true
+  }
 
-  return not table.concat(invalidTypes, ","):find(type(parameter))
+  return not invalidTypes[type(parameter)]
 end
 
 -- Checks if the parameter is a string type.
@@ -38,12 +39,14 @@ function LocalizationManager:constructor()
   self.children = {}
 end
 
--- Adds a widget, property and localization key.
+-- Adds a widget, widget property and localization key.
 -- add(widget: object, property: string, key: string) -> none
 function LocalizationManager:add(widget, property, key)
   if not isValidChild(widget) then return end
   if not isStringType(property) then return end
   if not isStringType(key) then return end
+  if property == "" then return end
+  if key == "" then return end
 
   local newChild = {
     widget = widget,
@@ -54,24 +57,22 @@ function LocalizationManager:add(widget, property, key)
   table.insert(self.children, newChild)
 end
 
--- Sets the translated text for each widget.
+-- Loads the localization text for each widget.
 -- apply() -> none
-function LocalizationManager:apply()
+function LocalizationManager:translate()
   for _, child in ipairs(self.children) do
-    local translatedText = self.dictionary[child.key]
-
-    if not isNilType(translatedText) then
-      child.widget[child.property] = translatedText
-    end
+    local localizationText = self.dictionary[child.key]
+    child.widget[child.property] = localizationText
   end
 
   os.setlocale(self.language, "all")
 end
 
--- Gets the translated text for a key.
+-- Gets the localization text for a key.
 -- translate(key: string) -> string
-function LocalizationManager:translate(key)
-  if not isStringType(key) then return "" end
+function LocalizationManager:text(key)
+  if not isStringType(key) then return end
+  if key == "" then return end
   return self.dictionary[key] or ""
 end
 

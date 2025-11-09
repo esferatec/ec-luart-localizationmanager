@@ -6,7 +6,7 @@ The project is a localization management module written in Lua. It defines a Loc
 
 ## Features
 
-The project provides a modular and flexible way to manage localization in desktop applications. It allows easy addition of widgets and their corresponding localization keys, as well as applying translations text. Several localization managers can be used in one application.
+The project provides a modular and flexible way to manage localization in desktop applications. It allows easy addition of widgets and their corresponding localization keys, as well as applying translated text. Several localization managers can be used in one application.
 
 ## Installation
 
@@ -62,23 +62,23 @@ String specifying the desired language.
 LocalizationManager:add(widget: object, property: string, key: string) -> none
 ```
 
-Adds a widget, property and localization key.
-
-## Method - apply
-
-```Lua
-LocalizationManager:apply() -> none
-```
-
-Sets the translated text for each widget.
+Adds a widget, widget property and localization key.
 
 ## Method - translate
 
 ```Lua
-LocalizationManager:translate(key: string) -> string
+LocalizationManager:translate() -> none
 ```
 
-Gets the translated text for a key.
+Loads the localization text for each widget.
+
+## Method - text
+
+```Lua
+LocalizationManager:text(key: string) -> string
+```
+
+Gets the localization text for a key.
 
 ## License
 
